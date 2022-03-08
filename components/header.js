@@ -18,7 +18,7 @@ function Header({ showArrow, menu }){
             		{showArrow && <button className="arrowLeft display-mb" type="button" onClick={() => router.back()}>
 				      {arrowLeft}
 				    </button>}
-                    <Link href="/"><a className="navbar-brand"><div className="image"><Image src="/assets/imgs/pokemon-logo.png" width={640} height={236} alt="Logo Tokopedia" /></div></a></Link>
+                    <Link href="/"><a className="navbar-brand"><div className="image"><Image src="/assets/imgs/pokemon-logo.png" width={640} height={236} alt="Logo Pokemon" /></div></a></Link>
                     
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item">

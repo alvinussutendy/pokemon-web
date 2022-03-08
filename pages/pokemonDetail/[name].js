@@ -102,7 +102,7 @@ function PokemonDetail({ detailData }){
 		})
 		  .then(r => r.json())
 		  .then(data => {
-		  	if(data.errors) onShowModal3('Nickname already used, use another nickname!'); else { onShowModal2('Pokemon added successfully') };
+		  	if(data.errors) onShowModal3(`Nickname ${nickname} already used, use another nickname!`); else { onShowModal2(`${nickname} added successfully`) };
 		  });
 	}
 

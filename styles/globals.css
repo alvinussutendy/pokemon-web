@@ -38,7 +38,6 @@
 
 .pokeData h5{
 	width: 100%;
-	text-align: center;
 	color: #000000
 }
 
@@ -93,8 +92,6 @@
 .myPokemonList .image-wrapper .image{
 	position: absolute;
 	top: 50%;
-	width: 65%;
-	left: 18%;
   	-ms-transform: translateY(-50%);
   	transform: translateY(-50%);
 }
@@ -116,16 +113,29 @@
 	padding-top: 20px;
 }
 
-.myPokemonList .arrowLeft{
-	margin-bottom: 20px;
+.infinite-scroll-component{
+	overflow-x: hidden !important;
 }
+
+.modal1 .card-body{
+	margin-top: -20px;
+}
+
 
 @media screen and (min-width: 480px){
 	.display-mb{
 		display: none !important;
 	}
 	.myPokemonList .pokeData .btn{
-		width: 75%;
+		width: 45%;
+	}
+	.pokeData h5{
+		text-align: left;
+	}
+
+	.myPokemonList .image-wrapper .image{
+		width: 42%;
+		left: 25%;
 	}
 }
 
@@ -157,5 +167,12 @@
 	}
 	.myPokemonList .pokeData .btn{
 		width: 100%;
+	}
+	.pokeData h5{
+		text-align: center;
+	}
+	.myPokemonList .image-wrapper .image{
+		width: 100%;
+		left: 0;
 	}
 }

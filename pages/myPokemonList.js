@@ -3,6 +3,10 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Header from '../components/header'
 import client from '../apollo-client'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
+
+const trash  = <FontAwesomeIcon icon={faTrash}/>
 
 const List = ({ pokeData, deleteData }) => (
 	<div className="section pokeData">
@@ -15,18 +19,22 @@ const List = ({ pokeData, deleteData }) => (
 							<div className="col-12 custom-padding" key={idx}>
 								<div className="card w-100">
 									<div className="row">
-										<div className="col-5 col-md-4">
+										<div className="col-5 col-md-6">
 											<div className="image-wrapper">
-												<div className="image"><Image className="card-img-top" src={obj.image} width={1000} height={1000} alt="Card image cap"/></div>
+												<Link href={{
+									              pathname: '/pokemonDetail/[name]',
+									              query: { name: obj.name }
+									            }}><a><div className="image"><Image className="card-img-top" src={obj.image} width={1000} height={1000} alt="Card image cap"/></div></a>
+									            </Link>
 									 		</div>
 									 	</div>
-									 	<div className="col-7 col-md-8 pl-0">
+									 	<div className="col-7 col-md-6 pl-0">
 										 	<div className="card-body">
 										 		<span>Name</span><br/>
 												<h5 className="card-title mb-4">{obj.name}</h5>
 												<span>Nickname</span><br/>
 												<h5 className="card-title">{obj.nickname}</h5>
-											    <button className="btn green-btn mt-3" onClick={() => deleteData(obj.nickname)}>Delete</button>
+											    <button className="btn white-btn mt-3" onClick={() => deleteData(obj.nickname)}>{trash} Delete</button>
 										  	</div>
 									  	</div>
 								  	</div>
