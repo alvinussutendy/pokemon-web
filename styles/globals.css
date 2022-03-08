@@ -1,0 +1,161 @@
+*, body{
+  padding: 0;
+  margin: 0;
+}
+
+.navbar-brand .image{
+	width: 145px;
+}
+
+.navbar{
+	box-shadow: 0 4px 6px -1px rgb(0 0 0 / 7%);
+	background-color: #FFFFFF;
+}
+
+.section{
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+.pokeData .card{
+	margin-bottom: 30px;
+}
+
+.pokemonDetail li{
+	display: inline-block;
+	float: left;
+	width: 150px;
+}
+
+.moves, .types{
+	float: left;
+	margin-top: 30px;
+}
+
+.pokeData a:hover{
+	text-decoration: none;
+}
+
+.pokeData h5{
+	width: 100%;
+	text-align: center;
+	color: #000000
+}
+
+.btn.green-btn{
+	background-color: rgb(0, 158, 73);
+	color: #FFFFFF;
+	padding: 10px 25px;
+	border-radius: 8px;
+}
+
+.btn.green-btn:hover{
+	background-color: #FFFFFF;
+	color: rgb(0, 158, 73);
+	padding: 10px 25px;
+	border-radius: 8px;
+	border: 1px solid rgb(0, 158, 73);
+}
+
+.btn.white-btn{
+	background-color: #FFFFFF;
+	color: rgb(0, 158, 73);
+	padding: 10px 25px;
+	border-radius: 8px;
+	border: 1px solid rgb(0, 158, 73);
+}
+
+.btn.white-btn:hover{
+	background-color: rgb(0, 158, 73);
+	color: #FFFFFF;
+	padding: 10px 25px;
+	border-radius: 8px;
+}
+
+.card .close{
+	font-size: 2.5rem;
+	margin-right: 1.25rem;
+	text-align: right;
+}
+
+.modal1 .image{
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.myPokemonList .image-wrapper{
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.myPokemonList .image-wrapper .image{
+	position: absolute;
+	top: 50%;
+	width: 65%;
+	left: 18%;
+  	-ms-transform: translateY(-50%);
+  	transform: translateY(-50%);
+}
+
+.moves-and-types{
+	overflow: auto;
+}
+
+.arrowLeft{
+	font-size: 25px;
+	color: #000000;
+	width: 37.5px;
+	display: inline-block;
+	background-color: transparent;
+	border: none;
+}
+
+.myPokemonList .pokeData{
+	padding-top: 20px;
+}
+
+.myPokemonList .arrowLeft{
+	margin-bottom: 20px;
+}
+
+@media screen and (min-width: 480px){
+	.display-mb{
+		display: none !important;
+	}
+	.myPokemonList .pokeData .btn{
+		width: 75%;
+	}
+}
+
+@media screen and (max-width: 479px){
+	.types{
+		margin-bottom: 40px;
+		width: 100%;
+	}
+	.pokemonDetail .image{
+		text-align: center;
+	}
+	.custom-padding{
+		padding-left: 10px !important;
+		padding-right: 10px !important;
+	}
+	.catch-wrapper{
+		height: 60px;
+		width: 100%;
+		background-color: #FFFFFF;
+		box-shadow: rgb(49 53 59 / 12%) 0px -1px 6px;
+		padding-top: 7px;
+		padding-bottom: 7px;
+	}
+	.pokemonDetail li{
+		width: 50%;
+	}
+	.display-pc{
+		display: none !important;
+	}
+	.myPokemonList .pokeData .btn{
+		width: 100%;
+	}
+}
