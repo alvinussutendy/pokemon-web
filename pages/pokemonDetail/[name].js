@@ -51,8 +51,8 @@ function PokemonDetail({ detailData }){
 	const [randNumber, setRandNumber] = useState(Math.round(Math.random()));
 
 	const onShowModal = () => {
-		setShowModal(true)
 		setRandNumber(Math.round(Math.random()))
+		setShowModal(true)
 	}	
 
 	const closeModal = () => {
