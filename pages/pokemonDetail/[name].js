@@ -48,6 +48,12 @@ function PokemonDetail({ detailData }){
 	const [nicknameState, setNickNameState] = useState('')
 	const [successAdd, setSuccessAdd] = useState(false)
 	const [loadingState, setLoadingState] = useState(false)
+	const [randNumber, setRandNumber] = useState(Math.round(Math.random()));
+
+	const onShowModal = () => {
+		setShowModal(true)
+		setRandNumber(Math.round(Math.random()))
+	}	
 
 	const closeModal = () => {
 		setShowModal(false)
@@ -170,7 +176,7 @@ function PokemonDetail({ detailData }){
 									${`@media (max-width: 479px)`}{
 										display: none;
 									}
-								`+' btn green-btn w-100 mt-5'} onClick={() => setShowModal(true)}>Catch</button>
+								`+' btn green-btn w-100 mt-5'} onClick={() => onShowModal(true)}>Catch</button>
 						 	</div>
 						</div>
 					</div>
@@ -188,13 +194,13 @@ function PokemonDetail({ detailData }){
 					}
 	  			`+ ' fixed-bottom'}>
 	  			<div className="container">
-	  				<button type="button" className="btn green-btn w-100" onClick={() => setShowModal(true)}>Catch</button>
+	  				<button type="button" className="btn green-btn w-100" onClick={() => onShowModal(true)}>Catch</button>
 	  			</div>
 	  		</div>
 	  		<Modal show={showModal} onHide={closeModal} centered>
                 <div className="card-wrapper modal1">
 					<div className="card pt-3">
-						<div>
+        				<div>
 							<button type="button" className="close" onClick={() => setShowModal(false)} aria-label="Close">
 					         	<span aria-hidden="true">&times;</span>
 					        </button>
@@ -202,17 +208,36 @@ function PokemonDetail({ detailData }){
 					    <div className={css`
 					    		margin-top: -20px;
 					    	`+' card-body'}>
-					    	<div  className={css`
-					    			width: 50%;
-									margin-left: auto;
-									margin-right: auto;
-									text-align: center;
-					    		`+' card-img-top'}><Image src={detailData.pokemon.sprites.front_default} width={1000} height={1000} alt="Card image cap"/></div>
-					        <h3 className="mb-4">{detailData.pokemon.name}</h3>
-					        <form className="form-group text-center" onSubmit={(event) => {addToMyPokemonList(event, detailData.pokemon.name, detailData.pokemon.sprites.front_default); setShowModal(false)}}>
-						 		<input className="form-control w-100" type="text" placeholder="Nickname" id="nickname" required/>
-						 		<input type="submit" className="btn green-btn mt-4" value="Add to my list"/>
-						 	</form>   
+					    	{
+						    	randNumber == 0 ? (
+	                				<div className="row">
+										<div className="col-4">
+											<div className="image-wrapper">
+												<div className="text-center"><Image className="card-img-top" src={'/assets/imgs/sad-emotion.jpg'} width={728} height={636} alt="Card image cap"/></div>
+									 		</div>
+									 	</div>
+									 	<div className="col-8 pl-0">
+										 	<div className="card-body">
+												<h5 className="card-title mb-4">Failed to catch the pokemon, please try again!</h5>
+										  	</div>
+									  	</div>
+								  	</div>
+		                		) : (
+		                			<>
+		                				<div className={css`
+								    			width: 50%;
+												margin-left: auto;
+												margin-right: auto;
+												text-align: center;
+								    		`+' card-img-top'}><Image src={detailData.pokemon.sprites.front_default} width={1000} height={1000} alt="Card image cap"/></div>
+								        <h3 className="mb-4">{detailData.pokemon.name}</h3>
+								        <form className="form-group text-center" onSubmit={(event) => {addToMyPokemonList(event, detailData.pokemon.name, detailData.pokemon.sprites.front_default); setShowModal(false)}}>
+									 		<input className="form-control w-100" type="text" placeholder="Nickname" id="nickname" required/>
+									 		<input type="submit" className="btn green-btn mt-4" value="Add to my list"/>
+									 	</form>  
+		                			</>
+		                		)
+					    	} 
 					    </div>
 					</div>
 				</div>
