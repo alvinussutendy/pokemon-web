@@ -147,10 +147,6 @@
 	.pokemonDetail .image{
 		text-align: center;
 	}
-	.custom-padding{
-		padding-left: 10px !important;
-		padding-right: 10px !important;
-	}
 	.catch-wrapper{
 		height: 60px;
 		width: 100%;

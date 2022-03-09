@@ -5,10 +5,26 @@ import Header from '../components/header'
 import client from '../apollo-client'
 import { gql } from "@apollo/client"
 import InfiniteScroll from "react-infinite-scroll-component";
+import { css, cx } from '@emotion/css'
+
+const color = 'white'
 
 const List = ({ pokeData, ownedTotal, fetchMoreData, hasMore }) => (
 	<div className="section pokeData">
 		<div className="container">
+			<div
+			    className={css`
+			      padding: 32px;
+			      background-color: green;
+			      font-size: 24px;
+			      border-radius: 4px;
+			      &:hover {
+			        color: ${color};
+			      }
+			    `}
+			  >
+			    Hover to change color.
+			  </div>
 			<h4>Owned Total of Pokemon: {ownedTotal}</h4><br/>
 			<h2>Pokemon List</h2>
 			<InfiniteScroll
