@@ -5,7 +5,7 @@ export default function Layout({ children }) {
         <div>
             <Head>
                 <title>Pokemon</title>
-                <meta name="description" content="Orion Desgin System"/>
+                <meta name="description" content="Pokemon Web"/>
                 <link rel="icon" href=""/>
              </Head>
             <main>{ children }</main>
