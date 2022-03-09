@@ -115,7 +115,7 @@ function PokemonDetail({ detailData }){
 		  			<div>
 					    <div className="row">
 					    	<div className="col-md-4">
-								<div className="image"><Image className="card-img-top" src={detailData.pokemon.sprites.front_default} width={1000} height={1000} alt="Card image cap"/></div>
+								<div className='text-center'><Image className="card-img-top" src={detailData.pokemon.sprites.front_default} width={1000} height={1000} alt="Card image cap"/></div>
 						 	</div>
 						 	<div className="col-md-5">
 							 	<h1>{detailData.pokemon.name}</h1>
@@ -146,7 +146,11 @@ function PokemonDetail({ detailData }){
 									<div  className={css`
 											float: left;
 											margin-top: 30px;
-										` + ' types'}>
+											${`@media (max-width: 479px)`}{
+												margin-bottom: 40px;
+												width: 100%;
+											}
+										`}>
 										<h5>Types</h5>
 										<ul>
 											{
@@ -167,13 +171,27 @@ function PokemonDetail({ detailData }){
 							  	</div>
 							</div>
 							<div className="col-md-3">
-								<button type="button" className="btn green-btn w-100 display-pc mt-5" onClick={() => setShowModal(true)}>Catch</button>
+								<button type="button" className={css`
+									${`@media (max-width: 479px)`}{
+										display: none;
+									}
+								`+' btn green-btn w-100 mt-5'} onClick={() => setShowModal(true)}>Catch</button>
 						 	</div>
 						</div>
 					</div>
 		  		</div>
 	  		</div>
-	  		<div className="fixed-bottom catch-wrapper display-mb">
+	  		<div className={css`
+	  				height: 60px;
+					width: 100%;
+					background-color: #FFFFFF;
+					box-shadow: rgb(49 53 59 / 12%) 0px -1px 6px;
+					padding-top: 7px;
+					padding-bottom: 7px;
+					${`@media (min-width: 480px)`}{
+						display: none;
+					}
+	  			`+ ' fixed-bottom'}>
 	  			<div className="container">
 	  				<button type="button" className="btn green-btn w-100" onClick={() => setShowModal(true)}>Catch</button>
 	  			</div>
@@ -193,6 +211,7 @@ function PokemonDetail({ detailData }){
 					    			width: 50%;
 									margin-left: auto;
 									margin-right: auto;
+									text-align: center;
 					    		`+' card-img-top'}><Image src={detailData.pokemon.sprites.front_default} width={1000} height={1000} alt="Card image cap"/></div>
 					        <h3 className="mb-4">{detailData.pokemon.name}</h3>
 					        <form className="form-group text-center" onSubmit={(event) => {addToMyPokemonList(event, detailData.pokemon.name, detailData.pokemon.sprites.front_default); setShowModal(false)}}>
@@ -215,7 +234,7 @@ function PokemonDetail({ detailData }){
 					        <div className="row">
 								<div className="col-4">
 									<div className="image-wrapper">
-										<div className="image"><Image className="card-img-top" src={detailData.pokemon.sprites.front_default} width={1000} height={1000} alt="Card image cap"/></div>
+										<div className="text-center"><Image className="card-img-top" src={detailData.pokemon.sprites.front_default} width={1000} height={1000} alt="Card image cap"/></div>
 							 		</div>
 							 	</div>
 							 	<div className="col-8 pl-0">
@@ -242,7 +261,7 @@ function PokemonDetail({ detailData }){
 					        <div className="row">
 								<div className="col-4">
 									<div className="image-wrapper">
-										<div className="image"><Image className="card-img-top" src={'/assets/imgs/sad-emotion.jpg'} width={1000} height={1000} alt="Card image cap"/></div>
+										<div className="text-center"><Image className="card-img-top" src={'/assets/imgs/sad-emotion.jpg'} width={728} height={636} alt="Card image cap"/></div>
 							 		</div>
 							 	</div>
 							 	<div className="col-8 pl-0">

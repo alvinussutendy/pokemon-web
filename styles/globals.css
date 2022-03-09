@@ -58,60 +58,12 @@
 	text-align: right;
 }
 
-.arrowLeft{
-	font-size: 25px;
-	color: #000000;
-	width: 37.5px;
-	display: inline-block;
-	background-color: transparent;
-	border: none;
-}
-
 .infinite-scroll-component{
 	overflow-x: hidden !important;
 }
 
-
-@media screen and (min-width: 480px){
-	.display-mb{
-		display: none !important;
-	}
-	.myPokemonList .image{
-		width: 42%;
-		left: 27%;
-	}
-}
-
 @media screen and (max-width: 479px){
-	.types{
-		margin-bottom: 40px;
-		width: 100%;
-	}
-	.pokemonDetail .image{
-		text-align: center;
-	}
-	.catch-wrapper{
-		height: 60px;
-		width: 100%;
-		background-color: #FFFFFF;
-		box-shadow: rgb(49 53 59 / 12%) 0px -1px 6px;
-		padding-top: 7px;
-		padding-bottom: 7px;
-	}
-	.pokemonDetail li{
-		width: 50%;
-	}
-	.display-pc{
-		display: none !important;
-	}
-	.myPokemonList .pokeData .btn{
-		width: 100%;
-	}
 	.pokeData h5{
 		text-align: center;
-	}
-	.myPokemonList .image{
-		width: 100%;
-		left: 0;
 	}
 }

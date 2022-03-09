@@ -11,7 +11,7 @@ const trash  = <FontAwesomeIcon icon={faTrash}/>
 
 const List = ({ pokeData, deleteData }) => (
 	<div className={css`
-			padding-top: 20px;
+			padding-top: 40px;
 		`+' section pokeData'}>
 		<div className="container">
 			<h3>My Pokemon List</h3>
@@ -34,9 +34,15 @@ const List = ({ pokeData, deleteData }) => (
 									            }}><a><div className={css`
 									            			position: absolute;
 															top: 50%;
+															width: 100%;
+															left: 0;
 														  	-ms-transform: translateY(-50%);
 														  	transform: translateY(-50%);
-									            	`+ ' image'}><Image className={css`
+														  	${'@media (min-width: 480px)'}{
+														  		width: 42%;
+																left: 27%;
+														  	}
+									            	`}><Image className={css`
 									            					width: 42%;
 																	left: 25%;
 									            		`+' card-img-top'} src={obj.image} width={1000} height={1000} alt="Card image cap"/></div></a>
@@ -51,6 +57,9 @@ const List = ({ pokeData, deleteData }) => (
 												<h5 className="card-title">{obj.nickname}</h5>
 											    <button className={css`
 											    	width: 45%;
+											    	${`@media (max-width: 479px)`}{
+											    		width: 100%;
+											    	}
 											    `+' btn white-btn mt-3'} onClick={() => deleteData(obj.nickname)}>{trash} Delete</button>
 										  	</div>
 									  	</div>

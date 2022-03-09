@@ -19,11 +19,25 @@ function Header({ showArrow, menu }){
 						background-color: #FFFFFF;
             	`+' navbar navbar-expand-md'}>
             	<div className="container">
-            		{showArrow && <button className="arrowLeft display-mb" type="button" onClick={() => router.back()}>
+            		{showArrow && <button className={css`
+            							font-size: 25px;
+										color: #000000;
+										width: 37.5px;
+										display: inline-block;
+										background-color: transparent;
+										border: none;
+										margin-right: 10px;
+									${`@media (min-width: 480px)`}{
+										display: none;
+									}
+								`} type="button" onClick={() => router.back()}>
 				      {arrowLeft}
 				    </button>}
                     <Link href="/"><a className="navbar-brand"><div className={css`
                     		width: 145px;
+                    		${`@media (max-width: 479px)`}{
+								width: 130px;
+							}
                     	`}><Image src="/assets/imgs/pokemon-logo.png" width={640} height={236} alt="Logo Pokemon" /></div></a></Link>
                     
                     <ul className="navbar-nav ml-auto">
