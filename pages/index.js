@@ -2,10 +2,9 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import Header from '../components/header'
-import client from '../apollo-client'
-import { gql } from "@apollo/client"
 import InfiniteScroll from "react-infinite-scroll-component";
 import { css, cx } from '@emotion/css'
+import axios from 'axios'
 
 const List = ({ pokeData, ownedTotal, fetchMoreData, hasMore }) => (
 	<div className="section pokeData">
@@ -51,29 +50,30 @@ const List = ({ pokeData, ownedTotal, fetchMoreData, hasMore }) => (
 )
 
 export async function getServerSideProps(ctx) {
-    const { data } = await client.query({
-		query: gql`
-			query Pokemons($offset: Int) {
-			    pokemons(limit: 200, offset: $offset) {
-			      count
-			      results {
-			        url
-			        name
-			        image
-			      }
-			    }
-			  }
-		`,
-	})
+    var query = `
+	    query Pokemons($offset: Int) {
+		    pokemons(limit: 200, offset: $offset) {
+		      count
+		      results {
+		        url
+		        name
+		        image
+		      }
+		    }
+		  }
+	`;
 
+	const data = await axios.post(`https://graphql-pokeapi.graphcdn.app`, {
+		query,
+	})
+	.then(data => data)
+ 
     return { 
         props: {
-        	ownedTotal: data.pokemons.count,
-            pokeData: data.pokemons.results,
+           	ownedTotal: data.data.data.pokemons.count,
+            pokeData: data.data.data.pokemons.results,
         },
     }
-
-
 }
 
 function PokemonList({ pokeData, ownedTotal }){

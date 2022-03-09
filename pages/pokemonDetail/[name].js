@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import Header from '../../components/header'
-import client from '../../apollo-client'
 import axios from 'axios'
 import { Modal } from 'react-bootstrap';
 import { css, cx } from '@emotion/css'
