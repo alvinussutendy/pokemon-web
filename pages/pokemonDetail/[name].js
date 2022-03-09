@@ -46,34 +46,29 @@ export async function getServerSideProps(ctx) {
 function PokemonDetail({ detailData }){
 	const [showModal, setShowModal] = useState(false)
 	const [showModal2, setShowModal2] = useState(false)
-	const [showModal3, setShowModal3] = useState(false)
-	const [infoModal, setInfoModal] = useState(false)
+	const [nicknameState, setNickNameState] = useState('')
+	const [successAdd, setSuccessAdd] = useState(false)
+	const [loadingState, setLoadingState] = useState(false)
 
 	const closeModal = () => {
 		setShowModal(false)
 	}
 
-	const onShowModal2 = (val) => {
+	const onShowModal2 = () => {
 		setShowModal2(true)
-		setInfoModal(val)
 	}	
 
 	const closeModal2 = () => {
 		setShowModal2(false)
 	}	
 
-	const onShowModal3 = (val) => {
-		setShowModal3(true)
-		setInfoModal(val)
-	}	
-
-	const closeModal3 = () => {
-		setShowModal3(false)
-	}	
-
 	const addToMyPokemonList = (event, name, image) => {
 		event.preventDefault();
+		onShowModal2();
+		setLoadingState(true)
+
 		let nickname = document.getElementById('nickname').value;
+		setNickNameState(nickname)
 
 		var name = name
 		var image = `"${image}"`
@@ -103,8 +98,9 @@ function PokemonDetail({ detailData }){
 		})
 		  .then(r => r.json())
 		  .then(data => {
-		  	if(data.errors) onShowModal3(`Nickname ${nickname} already used, use another nickname!`); else { onShowModal2(`${nickname} added successfully`) };
-		  });
+		  	if(data.errors) setSuccessAdd(false); else setSuccessAdd(true);
+		  })
+		  .then(() => setLoadingState(false));
 	}
 
   	return (
@@ -224,53 +220,56 @@ function PokemonDetail({ detailData }){
             </Modal>
             <Modal show={showModal2} onHide={closeModal2} centered>
                 <div className="card-wrapper modal2">
-					<div className="card pt-3">
+                	<div className={css`
+                			height: 296px
+                		`+' card pt-3'}>
 						<div>
 							<button type="button" className="close" onClick={() => setShowModal2(false)} aria-label="Close">
 					         	<span aria-hidden="true">&times;</span>
 					        </button>
 				        </div>
 					    <div className="card-body">
-					        <div className="row">
-								<div className="col-4">
-									<div className="image-wrapper">
-										<div className="text-center"><Image className="card-img-top" src={detailData.pokemon.sprites.front_default} width={1000} height={1000} alt="Card image cap"/></div>
-							 		</div>
-							 	</div>
-							 	<div className="col-8 pl-0">
-								 	<div className="card-body">
-										<h5 className="card-title mb-4">{infoModal}</h5>
-									    <Link href="/myPokemonList"><a className="btn white-btn w-100 mt-3">My pokemon list</a></Link>
+					    	{
+					    		loadingState ? (
+					    			<div className={css`
+					    					text-align: center;
+					    					margin-top: 30px;
+					    				`}>
+					    				<div className="lds-ellipsis mx-auto"><div></div><div></div><div></div><div></div></div>
+					    			</div>
+					    		) :
+					    		successAdd ? (
+					    			<div className="row">
+										<div className="col-4">
+											<div className="image-wrapper">
+												<div className="text-center"><Image className="card-img-top" src={detailData.pokemon.sprites.front_default} width={1000} height={1000} alt="Card image cap"/></div>
+									 		</div>
+									 	</div>
+									 	<div className="col-8 pl-0">
+										 	<div className="card-body">
+												<h5 className="card-title mb-4">{`${nicknameState} added successfully`}</h5>
+											    <Link href="/myPokemonList"><a className="btn white-btn w-100 mt-3">My pokemon list</a></Link>
 
+										  	</div>
+									  	</div>
 								  	</div>
-							  	</div>
-						  	</div>
-					    </div>
-					</div>
-				</div>
-            </Modal>
-            <Modal show={showModal3} onHide={closeModal3} centered>
-                <div className="card-wrapper modal2">
-					<div className="card pt-3">
-						<div>
-							<button type="button" className="close" onClick={() => setShowModal3(false)} aria-label="Close">
-					         	<span aria-hidden="true">&times;</span>
-					        </button>
-				        </div>
-					    <div className="card-body">
-					        <div className="row">
-								<div className="col-4">
-									<div className="image-wrapper">
-										<div className="text-center"><Image className="card-img-top" src={'/assets/imgs/sad-emotion.jpg'} width={728} height={636} alt="Card image cap"/></div>
-							 		</div>
-							 	</div>
-							 	<div className="col-8 pl-0">
-								 	<div className="card-body">
-										<h5 className="card-title mb-4">{infoModal}</h5>
-									    <button type="button" className="btn white-btn w-100 mt-3" onClick={() => {setShowModal3(false); setShowModal(true)}}>Try again</button>
+					    		) : (
+					    			<div className="row">
+										<div className="col-4">
+											<div className="image-wrapper">
+												<div className="text-center"><Image className="card-img-top" src={'/assets/imgs/sad-emotion.jpg'} width={728} height={636} alt="Card image cap"/></div>
+									 		</div>
+									 	</div>
+									 	<div className="col-8 pl-0">
+										 	<div className="card-body">
+												<h5 className="card-title mb-4">{`Nickname ${nicknameState} already used, use another nickname!`}</h5>
+											    <button type="button" className="btn white-btn w-100 mt-3" onClick={() => {setShowModal2(false); setShowModal(true)}}>Try again</button>
+										  	</div>
+									  	</div>
 								  	</div>
-							  	</div>
-						  	</div>
+					    		)
+					    	}
+					        
 					    </div>
 					</div>
 				</div>
