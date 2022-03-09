@@ -5,6 +5,7 @@ import Header from '../../components/header'
 import client from '../../apollo-client'
 import axios from 'axios'
 import { Modal } from 'react-bootstrap';
+import { css, cx } from '@emotion/css'
 
 export async function getServerSideProps(ctx) {
 	var name = ctx.params.name
@@ -118,13 +119,22 @@ function PokemonDetail({ detailData }){
 						 	</div>
 						 	<div className="col-md-5">
 							 	<h1>{detailData.pokemon.name}</h1>
-							 	<div className="moves-and-types">
-									<div className="moves">
+							 	<div className={css`
+							 			overflow: auto;
+							 		`}>
+									<div className={css`
+											float: left;
+											margin-top: 30px;
+										`}>
 										<h5>Moves</h5>
 										<ul>
 											{
 												detailData.pokemon.moves.map((obj, idx) => (
-													<li key={idx}>
+													<li key={idx} className={css`
+															display: inline-block;
+															float: left;
+															width: 50%;
+														`}>
 														{
 															obj.move.name
 														}
@@ -133,12 +143,19 @@ function PokemonDetail({ detailData }){
 											}
 										</ul>
 									</div>
-									<div className="types">
+									<div  className={css`
+											float: left;
+											margin-top: 30px;
+										` + ' types'}>
 										<h5>Types</h5>
 										<ul>
 											{
 												detailData.pokemon.types.map((obj, idx) => (
-													<li key={idx}>
+													<li key={idx} className={css`
+															display: inline-block;
+															float: left;
+															width: 50%;
+														`}>
 														{
 															obj.type.name
 														}
@@ -150,7 +167,7 @@ function PokemonDetail({ detailData }){
 							  	</div>
 							</div>
 							<div className="col-md-3">
-								<button type="button" className="btn green-btn w-100 display-pc" onClick={() => setShowModal(true)}>Catch</button>
+								<button type="button" className="btn green-btn w-100 display-pc mt-5" onClick={() => setShowModal(true)}>Catch</button>
 						 	</div>
 						</div>
 					</div>
@@ -169,8 +186,14 @@ function PokemonDetail({ detailData }){
 					         	<span aria-hidden="true">&times;</span>
 					        </button>
 				        </div>
-					    <div className="card-body">
-					    	<div className="image"><Image className="card-img-top" src={detailData.pokemon.sprites.front_default} width={1000} height={1000} alt="Card image cap"/></div>
+					    <div className={css`
+					    		margin-top: -20px;
+					    	`+' card-body'}>
+					    	<div  className={css`
+					    			width: 50%;
+									margin-left: auto;
+									margin-right: auto;
+					    		`+' card-img-top'}><Image src={detailData.pokemon.sprites.front_default} width={1000} height={1000} alt="Card image cap"/></div>
 					        <h3 className="mb-4">{detailData.pokemon.name}</h3>
 					        <form className="form-group text-center" onSubmit={(event) => {addToMyPokemonList(event, detailData.pokemon.name, detailData.pokemon.sprites.front_default); setShowModal(false)}}>
 						 		<input className="form-control w-100" type="text" placeholder="Nickname" id="nickname" required/>

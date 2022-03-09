@@ -5,26 +5,41 @@ import Header from '../components/header'
 import client from '../apollo-client'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { css, cx } from '@emotion/css'
 
 const trash  = <FontAwesomeIcon icon={faTrash}/>
 
 const List = ({ pokeData, deleteData }) => (
-	<div className="section pokeData">
+	<div className={css`
+			padding-top: 20px;
+		`+' section pokeData'}>
 		<div className="container">
 			<h3>My Pokemon List</h3>
 			<div className="row">
 				{
 					pokeData && pokeData.map((obj, idx) => {
 						return(
-							<div className="col-12 custom-padding" key={idx}>
+							<div className="col-12" key={idx}>
 								<div className="card w-100">
 									<div className="row">
 										<div className="col-5 col-md-6">
-											<div className="image-wrapper">
+											<div className={css`
+													position: relative;
+													width: 100%;
+													height: 100%;
+												`}>
 												<Link href={{
 									              pathname: '/pokemonDetail/[name]',
 									              query: { name: obj.name }
-									            }}><a><div className="image"><Image className="card-img-top" src={obj.image} width={1000} height={1000} alt="Card image cap"/></div></a>
+									            }}><a><div className={css`
+									            			position: absolute;
+															top: 50%;
+														  	-ms-transform: translateY(-50%);
+														  	transform: translateY(-50%);
+									            	`+ ' image'}><Image className={css`
+									            					width: 42%;
+																	left: 25%;
+									            		`+' card-img-top'} src={obj.image} width={1000} height={1000} alt="Card image cap"/></div></a>
 									            </Link>
 									 		</div>
 									 	</div>
@@ -34,7 +49,9 @@ const List = ({ pokeData, deleteData }) => (
 												<h5 className="card-title mb-4">{obj.name}</h5>
 												<span>Nickname</span><br/>
 												<h5 className="card-title">{obj.nickname}</h5>
-											    <button className="btn white-btn mt-3" onClick={() => deleteData(obj.nickname)}>{trash} Delete</button>
+											    <button className={css`
+											    	width: 45%;
+											    `+' btn white-btn mt-3'} onClick={() => deleteData(obj.nickname)}>{trash} Delete</button>
 										  	</div>
 									  	</div>
 								  	</div>

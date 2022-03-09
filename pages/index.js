@@ -7,24 +7,9 @@ import { gql } from "@apollo/client"
 import InfiniteScroll from "react-infinite-scroll-component";
 import { css, cx } from '@emotion/css'
 
-const color = 'white'
-
 const List = ({ pokeData, ownedTotal, fetchMoreData, hasMore }) => (
 	<div className="section pokeData">
 		<div className="container">
-			<div
-			    className={css`
-			      padding: 32px;
-			      background-color: green;
-			      font-size: 24px;
-			      border-radius: 4px;
-			      &:hover {
-			        color: ${color};
-			      }
-			    `}
-			  >
-			    Hover to change color.
-			  </div>
 			<h4>Owned Total of Pokemon: {ownedTotal}</h4><br/>
 			<h2>Pokemon List</h2>
 			<InfiniteScroll
@@ -37,13 +22,18 @@ const List = ({ pokeData, ownedTotal, fetchMoreData, hasMore }) => (
 					{
 						pokeData.map((obj, idx) => {
 							return(
-						          	<div className="col-6 col-md-2 custom-padding" key={idx}>
+						          	<div className="col-6 col-md-2" key={idx}>
 										<Link href={{
 							              pathname: '/pokemonDetail/[name]',
 							              query: { name: obj.name }
 							            }}
 							             ><a>
-							             	<div className="card w-100">
+							             	<div className={css`
+							             			&:hover{
+							             				background-color: rgba(0, 158, 73, 0.7);;
+							             				transition: .7s ease;
+							             			}
+							             		`+' card w-100'}>
 												<div className="image"><Image className="card-img-top" src={obj.image} width={250} height={250} alt="Card image cap"/></div>
 											 	<div className="card-body pt-0">
 											 		<h5 className="card-title text-center">{obj.name}</h5>
