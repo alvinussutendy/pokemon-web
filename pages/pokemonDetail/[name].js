@@ -5,39 +5,44 @@ import Header from '../../components/header'
 import axios from 'axios'
 import { Modal } from 'react-bootstrap';
 import { css, cx } from '@emotion/css'
+import client from '../../apollo-client'
+import { gql } from "@apollo/client"
 
 export async function getServerSideProps(ctx) {
 	var name = ctx.params.name
-	var query = `query pokemon($name: String!) {
-			  	pokemon(name: $name) {
-				    id
-				    name
-				    sprites {
-				      	front_default
-				    }
-				    moves {
-				      	move {
-				        	name
-				      	}
-				    }
-				    types {
-				      	type {
-				        	name
-				      	}
-				    }
-				}
-			}`;
 
-	const detailData = await axios.post(`https://graphql-pokeapi.graphcdn.app`, {
-		query,
-	    variables: { name },
+	const query = gql`
+	  query pokemon($name: String!) {
+		  	pokemon(name: $name) {
+			    id
+			    name
+			    sprites {
+			      	front_default
+			    }
+			    moves {
+			      	move {
+			        	name
+			      	}
+			    }
+			    types {
+			      	type {
+			        	name
+			      	}
+			    }
+			}
+		}
+	`;
+
+	const { data } = await client.query({
+	  query: query,
+	  variables: {
+	    name: `${name}`
+	  }
 	})
-	.then(data => data)
 
-   
     return { 
-        props: {
-            detailData: detailData.data.data,
+       props: {
+            detailData: data,
         },
     }
 }
